@@ -5,7 +5,7 @@ interface TokenPayload {
     user_id: number
 }
 
-export const generate_token = (data: TokenPayload, token_type: "access" | "refresh"): string => {
+export const generate_token = (token_type: "access" | "refresh", data: TokenPayload ): string => {
     const env_vars = environment()
     switch(token_type){
         case 'access':
@@ -15,12 +15,17 @@ export const generate_token = (data: TokenPayload, token_type: "access" | "refre
     }
 }
 
-export const verify_token = (token_string: string, token_type: "access" | "refresh"): TokenPayload => {
+export const verify_token = (token_type: "access" | "refresh", token_string?: string): TokenPayload | null => {
+    if(!token_string) return null
     const env_vars = environment()
-    switch(token_type){
-        case 'access':
-            return jwt.verify(token_string, env_vars.ACCESS_TOKEN_SECRET) as TokenPayload
-        case 'refresh':
-            return jwt.verify(token_string, env_vars.REFRESH_TOKEN_SECRET) as TokenPayload 
+    try {
+        switch(token_type){
+            case 'access':
+                return jwt.verify(token_string, env_vars.ACCESS_TOKEN_SECRET) as TokenPayload
+            case 'refresh':
+                return jwt.verify(token_string, env_vars.REFRESH_TOKEN_SECRET) as TokenPayload 
+        }
+    } catch {
+        return null
     }
 }

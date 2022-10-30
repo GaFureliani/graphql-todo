@@ -1,7 +1,10 @@
 import { arg, inputObjectType, mutationField, nonNull, objectType } from "nexus";
 import { compare, hash } from 'bcrypt'
-import { ApolloError } from "apollo-server";
 import { generate_token } from "src/helpers/tokens";
+import { GraphQLError } from "graphql";
+
+const FIFTEEN_MINUTES_IN_MS = 1000 * 60 * 60 * 15
+
 export const create_user_input = inputObjectType({
     name: "create_user_input",
     definition(t){
@@ -61,16 +64,23 @@ export const login_user = mutationField('login_user', {
             }
         })
 
-        if(!user) throw new ApolloError(`User with email: ${args.login.email} does not exist.`)
+        if(!user) throw new GraphQLError(`User with email: ${args.login.email} does not exist.`)
 
         const isValidPassword = await compare(args.login.password, user.password)
         
-        if(!isValidPassword) throw new ApolloError('Invalid email or password')
+        if(!isValidPassword) throw new GraphQLError('Invalid email or password')
 
-        const access_token = generate_token({user_id: user.id}, 'access')
+
+        const new_access_token = generate_token('access', {user_id: user.id})
+        const new_refresh_token = generate_token('refresh', {user_id: user.id})
+
+        ctx.res.cookie('refresh', new_refresh_token, {
+            httpOnly: true,
+            expires: new Date(Date.now() + FIFTEEN_MINUTES_IN_MS),
+        })
 
         return {
-            access_token,
+            access_token: new_access_token,
             user_id: user.id,
             username: user.username
         }

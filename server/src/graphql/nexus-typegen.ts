@@ -5,23 +5,8 @@
 
 
 import type { Context } from "./context"
-import type { core } from "nexus"
-declare global {
-  interface NexusGenCustomInputMethods<TypeName extends string> {
-    /**
-     * Date custom scalar type
-     */
-    date<FieldName extends string>(fieldName: FieldName, opts?: core.CommonInputFieldConfig<TypeName, FieldName>): void // "Date";
-  }
-}
-declare global {
-  interface NexusGenCustomOutputMethods<TypeName extends string> {
-    /**
-     * Date custom scalar type
-     */
-    date<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void // "Date";
-  }
-}
+
+
 
 
 declare global {
@@ -31,7 +16,7 @@ declare global {
 export interface NexusGenInputs {
   create_todo_input: { // input type
     description: string; // String!
-    target_date: NexusGenScalars['Date']; // Date!
+    target_date: NexusGenScalars['DateTime']; // DateTime!
   }
   create_user_input: { // input type
     email: string; // String!
@@ -53,7 +38,7 @@ export interface NexusGenScalars {
   Float: number
   Boolean: boolean
   ID: string
-  Date: any
+  DateTime: any
 }
 
 export interface NexusGenObjects {
@@ -64,13 +49,16 @@ export interface NexusGenObjects {
   }
   Mutation: {};
   Query: {};
+  RefreshTokenResponse: { // root type
+    access_token: string; // String!
+  }
   Todo: { // root type
-    created_at: NexusGenScalars['Date']; // Date!
+    created_at: NexusGenScalars['DateTime']; // DateTime!
     description: string; // String!
     done: boolean; // Boolean!
     id: number; // Int!
-    target_date: NexusGenScalars['Date']; // Date!
-    updated_at: NexusGenScalars['Date']; // Date!
+    target_date: NexusGenScalars['DateTime']; // DateTime!
+    updated_at: NexusGenScalars['DateTime']; // DateTime!
   }
   User: { // root type
     email: string; // String!
@@ -99,18 +87,22 @@ export interface NexusGenFieldTypes {
     create_todo: NexusGenRootTypes['Todo']; // Todo!
     create_user: NexusGenRootTypes['User']; // User!
     login_user: NexusGenRootTypes['AuthData']; // AuthData!
+    refresh_token: NexusGenRootTypes['RefreshTokenResponse'] | null; // RefreshTokenResponse
   }
   Query: { // field return type
     get_todos: NexusGenRootTypes['Todo'][]; // [Todo!]!
   }
+  RefreshTokenResponse: { // field return type
+    access_token: string; // String!
+  }
   Todo: { // field return type
     author: NexusGenRootTypes['User']; // User!
-    created_at: NexusGenScalars['Date']; // Date!
+    created_at: NexusGenScalars['DateTime']; // DateTime!
     description: string; // String!
     done: boolean; // Boolean!
     id: number; // Int!
-    target_date: NexusGenScalars['Date']; // Date!
-    updated_at: NexusGenScalars['Date']; // Date!
+    target_date: NexusGenScalars['DateTime']; // DateTime!
+    updated_at: NexusGenScalars['DateTime']; // DateTime!
   }
   User: { // field return type
     email: string; // String!
@@ -130,18 +122,22 @@ export interface NexusGenFieldTypeNames {
     create_todo: 'Todo'
     create_user: 'User'
     login_user: 'AuthData'
+    refresh_token: 'RefreshTokenResponse'
   }
   Query: { // field return type name
     get_todos: 'Todo'
   }
+  RefreshTokenResponse: { // field return type name
+    access_token: 'String'
+  }
   Todo: { // field return type name
     author: 'User'
-    created_at: 'Date'
+    created_at: 'DateTime'
     description: 'String'
     done: 'Boolean'
     id: 'Int'
-    target_date: 'Date'
-    updated_at: 'Date'
+    target_date: 'DateTime'
+    updated_at: 'DateTime'
   }
   User: { // field return type name
     email: 'String'

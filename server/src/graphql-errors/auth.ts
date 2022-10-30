@@ -1,3 +1,3 @@
-import { ApolloError } from "apollo-server";
+import { GraphQLError } from "graphql";
 
-export const APOLLO_ERROR_UNAUTHENTICATED = new ApolloError('Please login before making this request.')
+export const APOLLO_ERROR_UNAUTHENTICATED = new GraphQLError('Please login before making this request.')

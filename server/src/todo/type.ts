@@ -5,10 +5,10 @@ export const todo_type = objectType({
     definition(t){
         t.nonNull.int("id")          
         t.nonNull.string("description") 
-        t.nonNull.date("target_date")    //TODO: fix date implementation
+        t.nonNull.field("target_date", { type: 'DateTime' })
         t.nonNull.boolean("done")        
-        t.nonNull.date("created_at")  //TODO: fix date implementation
-        t.nonNull.date("updated_at")  //TODO: fix date implementation
+        t.nonNull.field("created_at", { type: 'DateTime' })
+        t.nonNull.field("updated_at", { type: 'DateTime' })
         t.nonNull.field("author", {
             type: 'User',
             async resolve(root, args, ctx){

@@ -7,12 +7,16 @@ export const prisma = new PrismaClient();
 export interface Context {
     prisma: PrismaClient
     user_id?: number
+    req: Request
+    res: Response
 }
 
-export const context = ({ req }: { req: Request }): Context => {
-    const token = req && req.headers.authorization?.replace("Bearer ", "");
+export const context = async ({ req, res }: { req: Request, res: Response }): Promise<Context> => {
+    const token = req.headers.authorization?.replace("Bearer ", "");
     return {
+        req,
+        res,
         prisma,
-        user_id: token ? verify_token(token, 'access').user_id : undefined
+        user_id: verify_token('access', token)?.user_id
     }
 }
