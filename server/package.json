@@ -1,0 +1,32 @@
+{
+  "name": "todo-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "ts-node-dev -r tsconfig-paths/register --transpile-only --no-notify src/server.ts",
+    "generate": "ts-node -r tsconfig-paths/register --transpile-only src/graphql/schema.ts",
+    "build": "tsc"
+  },
+  "author": "Gabriel Pureliani",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jsonwebtoken": "^8.5.9",
+    "prisma": "^4.5.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^4.8.4"
+  },
+  "dependencies": {
+    "@prisma/client": "^4.5.0",
+    "@types/bcrypt": "^5.0.0",
+    "apollo-server": "^3.10.3",
+    "bcrypt": "^5.1.0",
+    "dotenv": "^16.0.3",
+    "graphql": "^16.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "nexus": "^1.3.0",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.1.0"
+  }
+}
