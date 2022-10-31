@@ -2,8 +2,8 @@ import { arg, inputObjectType, mutationField, nonNull, objectType } from "nexus"
 import { compare, hash } from 'bcrypt'
 import { generate_token } from "src/helpers/tokens";
 import { GraphQLError } from "graphql";
+import { FIVE_DAYS_IN_MS } from "src/helpers/time";
 
-const FIFTEEN_MINUTES_IN_MS = 1000 * 60 * 60 * 15
 
 export const create_user_input = inputObjectType({
     name: "create_user_input",
@@ -76,7 +76,7 @@ export const login_user = mutationField('login_user', {
 
         ctx.res.cookie('refresh', new_refresh_token, {
             httpOnly: true,
-            expires: new Date(Date.now() + FIFTEEN_MINUTES_IN_MS),
+            expires: new Date(Date.now() + FIVE_DAYS_IN_MS),
         })
 
         return {

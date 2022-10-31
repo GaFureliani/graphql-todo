@@ -1,15 +1,13 @@
-import { ApolloServer } from '@apollo/server';
-import { expressMiddleware } from '@apollo/server/express4';
-import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
-import express from 'express';
-import http from 'http';
-import cors from 'cors';
-import { json } from 'body-parser';
 import { Context, context } from './graphql/context'
 import { environment } from './helpers/environment'
 import dotenv from 'dotenv'
 import { schema } from './graphql/schema';
+import { ApolloServer } from 'apollo-server-express';
+import express from 'express'
+import http from 'http'
+import { ApolloServerPluginDrainHttpServer, ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
 import cookieParser from 'cookie-parser';
+
 dotenv.config()
 
 const env_vars = environment()
@@ -23,21 +21,24 @@ if(!env_vars.REFRESH_TOKEN_SECRET) {
 }
 
 async function startApolloServer() {
-    const app = express();
-    const httpServer = http.createServer(app);
-    const server = new ApolloServer<Context>({
-        schema,
-        plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
-    });
-    await server.start();
-    app.use(
-      '/graphql',
-      json(),
-      cookieParser(),
-      cors<cors.CorsRequest>(),
-      expressMiddleware(server, { context }),
-    );
-    await new Promise<void>((resolve) => httpServer.listen({ port: 4000 }, resolve));
-    console.log(`🚀 Server ready at http://localhost:4000/graphql`);
-  }
-  startApolloServer()
+  const app = express();
+  const httpServer = http.createServer(app);
+  const server = new ApolloServer<Context>({
+    context,
+    schema,
+    csrfPrevention: true,
+    cache: 'bounded',
+    plugins: [ApolloServerPluginDrainHttpServer({ httpServer }), ApolloServerPluginLandingPageLocalDefault({
+      footer: false,
+      embed:true,
+      includeCookies: true 
+    })],
+  });
+  await server.start();
+  app.use(cookieParser())
+
+  server.applyMiddleware({ app });
+  await new Promise<void>((resolve) => httpServer.listen({ port: 4000 }, resolve));
+  console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`);
+}
+startApolloServer()

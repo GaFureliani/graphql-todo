@@ -1,8 +1,7 @@
 import { GraphQLError } from "graphql";
 import { mutationField, objectType } from "nexus";
+import { FIVE_DAYS_IN_MS } from "src/helpers/time";
 import { generate_token, verify_token } from "src/helpers/tokens";
-
-const FIVE_DAYS_IN_MS = 1000 * 60 * 60 * 12 * 5
 
 export const RefreshTokenResponse = objectType({
     name: 'RefreshTokenResponse',
@@ -14,11 +13,10 @@ export const RefreshTokenResponse = objectType({
 export const refresh_token = mutationField('refresh_token', {
     type: "RefreshTokenResponse",
     async resolve(_, __, ctx){
-        const refresh_token = ctx.req.cookies.refresh_token
+        const refresh_token = ctx.req.cookies.refresh as string
 
-        console.log(ctx.req.cookies)
+        const user_token = verify_token('refresh', refresh_token)
 
-        const user_token = verify_token(refresh_token, 'refresh')
         if(!user_token) {
             throw new GraphQLError('Invalid refresh token')
         }

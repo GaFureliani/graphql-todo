@@ -9,9 +9,9 @@ export const generate_token = (token_type: "access" | "refresh", data: TokenPayl
     const env_vars = environment()
     switch(token_type){
         case 'access':
-            return jwt.sign(data, env_vars.ACCESS_TOKEN_SECRET, { expiresIn: '15m' })
+            return jwt.sign({...data, iat: Date.now() / 1000}, env_vars.ACCESS_TOKEN_SECRET, { expiresIn: '1h' })
         case 'refresh':
-            return jwt.sign(data, env_vars.REFRESH_TOKEN_SECRET, { expiresIn: '15m' })
+            return jwt.sign({...data, iat: Date.now() / 1000}, env_vars.REFRESH_TOKEN_SECRET, { expiresIn: '7d' })
     }
 }
 
@@ -22,8 +22,9 @@ export const verify_token = (token_type: "access" | "refresh", token_string?: st
         switch(token_type){
             case 'access':
                 return jwt.verify(token_string, env_vars.ACCESS_TOKEN_SECRET) as TokenPayload
-            case 'refresh':
-                return jwt.verify(token_string, env_vars.REFRESH_TOKEN_SECRET) as TokenPayload 
+            case 'refresh':{
+                return jwt.verify(token_string, env_vars.REFRESH_TOKEN_SECRET) as TokenPayload
+            }
         }
     } catch {
         return null
