@@ -3,16 +3,17 @@ import { Dialog, Transition } from '@headlessui/react'
 import { CloseBtn } from './close-btn'
 
 interface ModalProps {
-  title: string
   children: ReactNode
-  buttonText: string
+  openButton: ReactNode
 }
 
-export const Modal = ({ children, title, buttonText}: ModalProps) => {
+export const Modal = ({ children, openButton}: ModalProps) => {
   const [isOpen, setIsOpen] = useState(false)
   return (
       <Fragment>
-        <button onClick={() => setIsOpen(true)} className="px-5 py-2 bg-blue-700 text-white rounded-md">{buttonText}</button>
+        <span onClick={()=>setIsOpen(true)}>
+          {openButton}
+        </span>
         <Transition
         show={isOpen}
         enter="transition duration-150 ease-out"

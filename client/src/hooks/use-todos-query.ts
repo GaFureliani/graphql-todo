@@ -1,20 +1,22 @@
 import { gql, useQuery } from "@apollo/client";
 
-export type GET_TODOS_RESPONSE = {
-  id: number
-  created_at: Date
-  description: string
-  done: boolean
-  target_date: Date
-  updated_at: Date
-  author: {
+export interface TodosResponse {
+  get_todos: {
     id: number
-    email: string
-    username: string
-  }
-}[]
+    created_at: string
+    description: string
+    done: boolean
+    target_date: string
+    updated_at: string
+    author: {
+      id: number
+      email: string
+      username: string
+    }
+  }[]
+}
 
-const GET_TODOS = gql`
+export const todos_query = gql`
   query {
     get_todos {
       id
@@ -32,4 +34,4 @@ const GET_TODOS = gql`
   }
 `
 
-export const useTodosQuery = () => useQuery<GET_TODOS_RESPONSE>(GET_TODOS)
+export const useTodosQuery = () => useQuery<TodosResponse>(todos_query)

@@ -89,6 +89,7 @@ export interface NexusGenFieldTypes {
   Mutation: { // field return type
     create_todo: NexusGenRootTypes['Todo']; // Todo!
     create_user: NexusGenRootTypes['User']; // User!
+    done: boolean | null; // Boolean
     login_user: NexusGenRootTypes['AuthData']; // AuthData!
     logout_user: NexusGenRootTypes['LogoutResponse'] | null; // LogoutResponse
     refresh_token: NexusGenRootTypes['AuthData'] | null; // AuthData
@@ -125,6 +126,7 @@ export interface NexusGenFieldTypeNames {
   Mutation: { // field return type name
     create_todo: 'Todo'
     create_user: 'User'
+    done: 'Boolean'
     login_user: 'AuthData'
     logout_user: 'LogoutResponse'
     refresh_token: 'AuthData'
@@ -156,6 +158,10 @@ export interface NexusGenArgTypes {
     }
     create_user: { // args
       user: NexusGenInputs['create_user_input']; // create_user_input!
+    }
+    done: { // args
+      done: boolean; // Boolean!
+      todo_id: number; // Int!
     }
     login_user: { // args
       login: NexusGenInputs['login_user_input']; // login_user_input!

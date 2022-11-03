@@ -1,5 +1,5 @@
-import { arg, inputObjectType, mutationField, nonNull } from "nexus"
-import { APOLLO_ERROR_UNAUTHENTICATED } from "src/graphql-errors/auth"
+import { arg, inputObjectType, mutationField, nonNull, objectType } from "nexus"
+import { GRAPHQL_ERROR_UNAUTHENTICATED } from "src/graphql-errors/auth"
 
 export const create_todo_input = inputObjectType({
     name: "create_todo_input",
@@ -16,7 +16,7 @@ export const create_todo =  mutationField('create_todo', {
     },
     async resolve(root, args, ctx){
         const user_id = ctx.user_id
-        if(!user_id) throw APOLLO_ERROR_UNAUTHENTICATED
+        if(!user_id) throw GRAPHQL_ERROR_UNAUTHENTICATED
 
         const todo = await ctx.prisma.todo.create({
             data: {
@@ -31,5 +31,25 @@ export const create_todo =  mutationField('create_todo', {
         })
         const {author_id, ...rest} = todo
         return rest
+    }
+})
+
+export const set_done = mutationField('done', {
+    type: "Boolean",
+    args: {
+        todo_id: nonNull("Int"),
+        done: nonNull("Boolean")
+    },
+    async resolve(root, args, ctx) {
+        const todo = await ctx.prisma.todo.update({
+            where:{
+                id: args.todo_id
+            },
+            data: {
+                done: args.done
+            }
+        })
+
+        return todo.done
     }
 })

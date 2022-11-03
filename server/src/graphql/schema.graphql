@@ -20,6 +20,7 @@ type LogoutResponse {
 type Mutation {
   create_todo(todo: create_todo_input!): Todo!
   create_user(user: create_user_input!): User!
+  done(done: Boolean!, todo_id: Int!): Boolean
   login_user(login: login_user_input!): AuthData!
   logout_user: LogoutResponse
   refresh_token: AuthData

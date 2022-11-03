@@ -1,6 +1,6 @@
 import { gql, useMutation } from "@apollo/client"
 
-interface refresh_response {
+export interface refresh_response {
   refresh_token: {
     user_id: number,
     username: string
@@ -8,7 +8,7 @@ interface refresh_response {
   }
 }
 
-const refresh_mutation = gql`
+export const refresh_mutation = gql`
   mutation {
     refresh_token {
       user_id
