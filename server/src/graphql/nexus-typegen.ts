@@ -47,11 +47,11 @@ export interface NexusGenObjects {
     user_id: number; // Int!
     username: string; // String!
   }
+  LogoutResponse: { // root type
+    ok?: boolean | null; // Boolean
+  }
   Mutation: {};
   Query: {};
-  RefreshTokenResponse: { // root type
-    access_token: string; // String!
-  }
   Todo: { // root type
     created_at: NexusGenScalars['DateTime']; // DateTime!
     description: string; // String!
@@ -83,17 +83,18 @@ export interface NexusGenFieldTypes {
     user_id: number; // Int!
     username: string; // String!
   }
+  LogoutResponse: { // field return type
+    ok: boolean | null; // Boolean
+  }
   Mutation: { // field return type
     create_todo: NexusGenRootTypes['Todo']; // Todo!
     create_user: NexusGenRootTypes['User']; // User!
     login_user: NexusGenRootTypes['AuthData']; // AuthData!
-    refresh_token: NexusGenRootTypes['RefreshTokenResponse'] | null; // RefreshTokenResponse
+    logout_user: NexusGenRootTypes['LogoutResponse'] | null; // LogoutResponse
+    refresh_token: NexusGenRootTypes['AuthData'] | null; // AuthData
   }
   Query: { // field return type
     get_todos: NexusGenRootTypes['Todo'][]; // [Todo!]!
-  }
-  RefreshTokenResponse: { // field return type
-    access_token: string; // String!
   }
   Todo: { // field return type
     author: NexusGenRootTypes['User']; // User!
@@ -118,17 +119,18 @@ export interface NexusGenFieldTypeNames {
     user_id: 'Int'
     username: 'String'
   }
+  LogoutResponse: { // field return type name
+    ok: 'Boolean'
+  }
   Mutation: { // field return type name
     create_todo: 'Todo'
     create_user: 'User'
     login_user: 'AuthData'
-    refresh_token: 'RefreshTokenResponse'
+    logout_user: 'LogoutResponse'
+    refresh_token: 'AuthData'
   }
   Query: { // field return type name
     get_todos: 'Todo'
-  }
-  RefreshTokenResponse: { // field return type name
-    access_token: 'String'
   }
   Todo: { // field return type name
     author: 'User'

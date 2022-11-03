@@ -1,6 +1,6 @@
 import { arg, inputObjectType, mutationField, nonNull, objectType } from "nexus";
 import { compare, hash } from 'bcrypt'
-import { generate_token } from "src/helpers/tokens";
+import { generate_token, verify_token } from "src/helpers/tokens";
 import { GraphQLError } from "graphql";
 import { FIVE_DAYS_IN_MS } from "src/helpers/time";
 
@@ -83,6 +83,25 @@ export const login_user = mutationField('login_user', {
             access_token: new_access_token,
             user_id: user.id,
             username: user.username
+        }
+    }
+})
+
+export const logout_response = objectType({
+    name: 'LogoutResponse',
+    definition(t){
+        t.boolean('ok')
+    }
+})
+
+export const logout_user = mutationField('logout_user', {
+    type: 'LogoutResponse',
+    async resolve(root, args, ctx){
+        ctx.res.cookie('refresh', {expires: Date.now()});
+
+
+        return {
+            ok: true
         }
     }
 })

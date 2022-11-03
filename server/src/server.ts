@@ -7,6 +7,7 @@ import express from 'express'
 import http from 'http'
 import { ApolloServerPluginDrainHttpServer, ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 
 dotenv.config()
 
@@ -17,7 +18,7 @@ if(!env_vars.ACCESS_TOKEN_SECRET) {
 }
 
 if(!env_vars.REFRESH_TOKEN_SECRET) {
-    throw new Error("Please set the environment variable \"REFRESH_TOKEN_SECRET\" to some value")
+  throw new Error("Please set the environment variable \"REFRESH_TOKEN_SECRET\" to some value")
 }
 
 async function startApolloServer() {
@@ -37,7 +38,7 @@ async function startApolloServer() {
   await server.start();
   app.use(cookieParser())
 
-  server.applyMiddleware({ app });
+  server.applyMiddleware({ app, cors: {origin: ["http://localhost:5173"], credentials: true} });
   await new Promise<void>((resolve) => httpServer.listen({ port: 4000 }, resolve));
   console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`);
 }
