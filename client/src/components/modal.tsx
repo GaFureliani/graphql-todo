@@ -12,7 +12,7 @@ export const Modal = ({ children, title, buttonText}: ModalProps) => {
   const [isOpen, setIsOpen] = useState(false)
   return (
       <Fragment>
-        <button onClick={() => setIsOpen(true)}>{buttonText}</button>
+        <button onClick={() => setIsOpen(true)} className="px-5 py-2 bg-blue-700 text-white rounded-md">{buttonText}</button>
         <Transition
         show={isOpen}
         enter="transition duration-150 ease-out"
