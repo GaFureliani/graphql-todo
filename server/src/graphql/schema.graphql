@@ -10,9 +10,13 @@ scalar DateTime
 type Mutation {
   create_todo(todo: create_todo_input!): Todo!
   create_user(user: create_user_input!): User!
+
+  """Returns the number of deleted Todo's"""
   delete_todos(todo_ids: [Int!]!): Int!
   login(login: login_input!): User!
   logout: Boolean
+
+  """Returns a Todo object after the update"""
   update_todo(todo: update_todo_input!): Todo!
 }
 

@@ -52,6 +52,7 @@ export const update_todo = mutationField('update_todo', {
     args: {
         todo: nonNull(arg({ type: update_todo_input }))
     },
+    description: 'Returns a Todo object after the update',
     async resolve(_, args, ctx) {
         if(!ctx.user_id) throw GRAPHQL_ERROR_UNAUTHENTICATED
 
@@ -82,6 +83,7 @@ export const update_todo = mutationField('update_todo', {
 export const delete_todos = mutationField('delete_todos', {
     type: nonNull('Int'),
     args: { todo_ids: nonNull(list(nonNull('Int'))) },
+    description: 'Returns the number of deleted Todo\'s',
     async resolve(_, args, ctx) {
         if(!ctx.user_id) throw GRAPHQL_ERROR_UNAUTHENTICATED
         const todos = await ctx.prisma.todo.deleteMany({
