@@ -57,6 +57,7 @@ input create_user_input {
 input login_input {
   email: String!
   password: String!
+  with_credentials: Boolean!
 }
 
 input update_todo_input {

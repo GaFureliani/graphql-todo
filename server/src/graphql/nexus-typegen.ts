@@ -27,6 +27,7 @@ export interface NexusGenInputs {
   login_input: { // input type
     email: string; // String!
     password: string; // String!
+    with_credentials: boolean; // Boolean!
   }
   update_todo_input: { // input type
     description?: string | null; // String
