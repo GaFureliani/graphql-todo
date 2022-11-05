@@ -1,8 +1,8 @@
 import { onError } from "@apollo/client/link/error";
 import { fromPromise } from '@apollo/client'
-
-import { refresh_mutation, refresh_response } from 'hooks/use-refresh-mutation';
 import { client } from 'main'
+import { login, login_data } from "hooks/auth/use-login";
+import { useAuth } from "hooks/auth/use-auth";
 let isRefreshing = false;
 let pendingRequests: (() => void)[] = [];
 
@@ -11,15 +11,19 @@ const resolvePendingRequests = () => {
   pendingRequests = [];
 };
 
-const getNewToken = () => {
-  return client.mutate({ mutation: refresh_mutation }).then((response) => {
-    // extract your accessToken from your response data and return it
-    const { access_token } = (response.data as refresh_response).refresh_token;
-    return access_token;
+const relogin = () => {
+  return client.mutate({ mutation: login, variables: {
+    login: {
+      email: '',
+      password: '',
+      with_credentials: false,
+    }
+  } }).then((response) => {
+    return response.data as login_data;
   });
 };
 
-export const errorLink = onError(
+export const relogin_link = onError(
   ({ graphQLErrors, networkError, operation, forward }) => {
     if (graphQLErrors) {
       for (let err of graphQLErrors) {
@@ -32,11 +36,12 @@ export const errorLink = onError(
             if (!isRefreshing) {
               isRefreshing = true;
               forward$ = fromPromise(
-                getNewToken()
-                  .then((access_token) => {
+                relogin()
+                  .then((response) => {
                     // Store the new tokens for your auth link
+                    useAuth.setState({user: response.login})
                     resolvePendingRequests();
-                    return access_token;
+                    return response.login.access_token;
                   })
                   .catch(error => {
                     pendingRequests = [];

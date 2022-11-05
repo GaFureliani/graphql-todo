@@ -13,7 +13,7 @@ export interface todos_data {
     }
     created_at: string
     updated_at: string
-  }
+  }[]
 }
 
 const todos = gql`

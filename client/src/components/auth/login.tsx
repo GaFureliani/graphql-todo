@@ -22,15 +22,10 @@ export const Login = () => {
       validationSchema={validationSchema}
       initialValues={initial_values}
       onSubmit={({email, password}) => {
-        login({variables: {login: {email, password, with_credentials: false}}})
+        login({variables: {login: {email, password, with_credentials: true}}})
         .then(res => {
           if(res.data) {
-            setUser({
-              id: res.data.login.id, 
-              email: res.data.login.email, 
-              access_token: res.data.login.access_token, 
-              username: res.data.login.username
-            })
+            setUser(res.data.login)
           }
         })
       }}

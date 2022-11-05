@@ -17,7 +17,7 @@ export interface login_input {
   }
 } 
 
-const login = gql`
+export const login = gql`
   mutation Login($login: login_input!) {
     login(login: $login) {
       id

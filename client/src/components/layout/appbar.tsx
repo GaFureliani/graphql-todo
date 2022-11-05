@@ -1,9 +1,9 @@
-import { SignUp } from "./auth/signup"
-import { Login } from "./auth/login"
-import { Modal } from "./modal"
+import { SignUp } from "../auth/signup"
+import { Login } from "../auth/login"
+import { Modal } from "../modal"
 import { useAuth } from "hooks/auth/use-auth"
 import { Fragment } from "react"
-import { LogoutBtn } from "./auth/logout-btn"
+import { LogoutBtn } from "../auth/logout-btn"
 
 export const Appbar = () => {
   const [username, access_token] = useAuth(state=>[state.user.username, state.user.access_token])
