@@ -1,7 +1,6 @@
 import { Field, Form, Formik, ErrorMessage} from "formik"
-import { useAuth } from "hooks/use-auth"
-import { useLogin } from "hooks/use-login"
-import { useLoginMutation } from "hooks/use-login-mutation"
+import { useLogin } from "hooks/auth/use-login"
+import { useAuth } from "hooks/auth/use-auth"
 import * as yup from 'yup'
 import { LoginBtn } from "./login-btn"
 
@@ -16,12 +15,25 @@ const initial_values = {
 }
 
 export const Login = () => {
-  const {loading, login} = useLogin()
+  const [login] = useLogin()
+  const setUser = useAuth(state => state.setUser)
   return (
     <Formik 
       validationSchema={validationSchema}
       initialValues={initial_values}
-      onSubmit={login}
+      onSubmit={({email, password}) => {
+        login({variables: {login: {email, password, with_credentials: false}}})
+        .then(res => {
+          if(res.data) {
+            setUser({
+              id: res.data.login.id, 
+              email: res.data.login.email, 
+              access_token: res.data.login.access_token, 
+              username: res.data.login.username
+            })
+          }
+        })
+      }}
     >
       <Form className="flex flex-col items-center md:w-[350px] pb-10 pt-5 px-4 gap-4 bg-white rounded-md">
         <div>Login</div>

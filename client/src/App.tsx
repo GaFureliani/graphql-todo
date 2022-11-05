@@ -1,6 +1,6 @@
 import { Appbar } from "components/appbar"
 import { TodoTable } from "components/todo-table"
-import { useAuth } from "hooks/use-auth"
+import { useAuth } from "hooks/auth/use-auth"
 import { useRefreshMutation } from "hooks/use-refresh-mutation"
 import { useEffect } from "react"
 

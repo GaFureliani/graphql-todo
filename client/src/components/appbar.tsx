@@ -1,7 +1,7 @@
 import { SignUp } from "./auth/signup"
 import { Login } from "./auth/login"
 import { Modal } from "./modal"
-import { useAuth } from "hooks/use-auth"
+import { useAuth } from "hooks/auth/use-auth"
 import { Fragment } from "react"
 import { LogoutBtn } from "./auth/logout-btn"
 

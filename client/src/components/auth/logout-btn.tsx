@@ -1,17 +1,19 @@
-import { useAuth } from "hooks/use-auth"
-import { useLogoutMutation } from "hooks/use-logout-mutation"
-
+import { useLogout } from "hooks/auth/use-logout"
+import { useAuth } from "hooks/auth/use-auth"
 export const LogoutBtn = () => {
-  const [logout, { loading }] = useLogoutMutation()
-  const setUser = useAuth(state=>state.setUser)
-  const handleLogout = () => {
+  const [logout, {loading}] = useLogout()
+  const resetAuth = useAuth(state => state.reset)
+  const onLogout = () => {
     logout()
-    .then((response) => {
-      setUser({access_token: '', user_id: 0, username: ''})
+    .then(response => {
+      if(response.data?.logout) {
+        resetAuth()
+      }
     })
   }
+
   return (
-    <button onClick={handleLogout} disabled={loading} className="flex items-center justify-center gap-2 bg-blue-600 px-4 py-2 rounded-md text-white w-full">
+    <button onClick={onLogout} disabled={loading} className="flex items-center justify-center gap-2 bg-blue-600 px-4 py-2 rounded-md text-white w-full">
        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
         <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
       </svg>

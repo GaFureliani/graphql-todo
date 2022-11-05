@@ -5,7 +5,7 @@ import App from './app'
 import './index.css'
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink, ApolloLink, from } from '@apollo/client'
 
-import { useAuth } from 'hooks/use-auth'
+import { useAuth } from 'hooks/auth/use-auth'
 import { errorLink } from 'helpers/token-refresh-link';
 
 const authLink = new ApolloLink((operation,forward)=>{
