@@ -1,6 +1,5 @@
 import { Fragment, ReactNode, useState } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import { CloseBtn } from './close-btn'
+import { Transition } from '@headlessui/react'
 
 interface ModalProps {
   children: ReactNode
