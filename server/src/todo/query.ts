@@ -1,8 +1,7 @@
-import { ApolloError } from "apollo-server";
 import { list, nonNull, queryField } from "nexus";
 import { GRAPHQL_ERROR_UNAUTHENTICATED } from "src/graphql-errors/auth";
 
-export const get_todos = queryField('get_todos', {
+export const todos = queryField('todos', {
     type: nonNull(list(nonNull("Todo"))),
     async resolve(root, args, ctx) {
         const user_id = ctx.user_id

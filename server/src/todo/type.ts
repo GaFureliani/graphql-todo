@@ -1,6 +1,6 @@
 import { objectType } from "nexus";
 
-export const todo_type = objectType({
+export const GQL_Todo = objectType({
     name: 'Todo',
     definition(t){
         t.nonNull.int("id")          

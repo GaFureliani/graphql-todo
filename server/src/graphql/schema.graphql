@@ -2,32 +2,22 @@
 ### Do not make changes to this file directly
 
 
-type AuthData {
-  access_token: String!
-  user_id: Int!
-  username: String!
-}
-
 """
 A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
 """
 scalar DateTime
 
-type LogoutResponse {
-  ok: Boolean
-}
-
 type Mutation {
   create_todo(todo: create_todo_input!): Todo!
   create_user(user: create_user_input!): User!
-  done(done: Boolean!, todo_id: Int!): Boolean
-  login_user(login: login_user_input!): AuthData!
-  logout_user: LogoutResponse
-  refresh_token: AuthData
+  delete_todos(todo_ids: [Int!]!): Int!
+  login(login: login_input!): User!
+  logout: Boolean
+  update_todo(todo: update_todo_input!): Todo!
 }
 
 type Query {
-  get_todos: [Todo!]!
+  todos: [Todo!]!
 }
 
 type Todo {
@@ -41,6 +31,7 @@ type Todo {
 }
 
 type User {
+  access_token: String
   email: String!
   id: Int!
   todos: [Todo!]!
@@ -49,6 +40,7 @@ type User {
 
 input create_todo_input {
   description: String!
+  done: Boolean!
   target_date: DateTime!
 }
 
@@ -58,7 +50,14 @@ input create_user_input {
   username: String!
 }
 
-input login_user_input {
+input login_input {
   email: String!
   password: String!
+}
+
+input update_todo_input {
+  description: String
+  done: Boolean
+  target_date: DateTime
+  todo_id: Int!
 }

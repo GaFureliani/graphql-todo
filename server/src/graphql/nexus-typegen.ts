@@ -16,6 +16,7 @@ declare global {
 export interface NexusGenInputs {
   create_todo_input: { // input type
     description: string; // String!
+    done: boolean; // Boolean!
     target_date: NexusGenScalars['DateTime']; // DateTime!
   }
   create_user_input: { // input type
@@ -23,9 +24,15 @@ export interface NexusGenInputs {
     password: string; // String!
     username: string; // String!
   }
-  login_user_input: { // input type
+  login_input: { // input type
     email: string; // String!
     password: string; // String!
+  }
+  update_todo_input: { // input type
+    description?: string | null; // String
+    done?: boolean | null; // Boolean
+    target_date?: NexusGenScalars['DateTime'] | null; // DateTime
+    todo_id: number; // Int!
   }
 }
 
@@ -42,14 +49,6 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
-  AuthData: { // root type
-    access_token: string; // String!
-    user_id: number; // Int!
-    username: string; // String!
-  }
-  LogoutResponse: { // root type
-    ok?: boolean | null; // Boolean
-  }
   Mutation: {};
   Query: {};
   Todo: { // root type
@@ -61,6 +60,7 @@ export interface NexusGenObjects {
     updated_at: NexusGenScalars['DateTime']; // DateTime!
   }
   User: { // root type
+    access_token?: string | null; // String
     email: string; // String!
     id: number; // Int!
     username: string; // String!
@@ -78,24 +78,16 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
-  AuthData: { // field return type
-    access_token: string; // String!
-    user_id: number; // Int!
-    username: string; // String!
-  }
-  LogoutResponse: { // field return type
-    ok: boolean | null; // Boolean
-  }
   Mutation: { // field return type
     create_todo: NexusGenRootTypes['Todo']; // Todo!
     create_user: NexusGenRootTypes['User']; // User!
-    done: boolean | null; // Boolean
-    login_user: NexusGenRootTypes['AuthData']; // AuthData!
-    logout_user: NexusGenRootTypes['LogoutResponse'] | null; // LogoutResponse
-    refresh_token: NexusGenRootTypes['AuthData'] | null; // AuthData
+    delete_todos: number; // Int!
+    login: NexusGenRootTypes['User']; // User!
+    logout: boolean | null; // Boolean
+    update_todo: NexusGenRootTypes['Todo']; // Todo!
   }
   Query: { // field return type
-    get_todos: NexusGenRootTypes['Todo'][]; // [Todo!]!
+    todos: NexusGenRootTypes['Todo'][]; // [Todo!]!
   }
   Todo: { // field return type
     author: NexusGenRootTypes['User']; // User!
@@ -107,6 +99,7 @@ export interface NexusGenFieldTypes {
     updated_at: NexusGenScalars['DateTime']; // DateTime!
   }
   User: { // field return type
+    access_token: string | null; // String
     email: string; // String!
     id: number; // Int!
     todos: NexusGenRootTypes['Todo'][]; // [Todo!]!
@@ -115,24 +108,16 @@ export interface NexusGenFieldTypes {
 }
 
 export interface NexusGenFieldTypeNames {
-  AuthData: { // field return type name
-    access_token: 'String'
-    user_id: 'Int'
-    username: 'String'
-  }
-  LogoutResponse: { // field return type name
-    ok: 'Boolean'
-  }
   Mutation: { // field return type name
     create_todo: 'Todo'
     create_user: 'User'
-    done: 'Boolean'
-    login_user: 'AuthData'
-    logout_user: 'LogoutResponse'
-    refresh_token: 'AuthData'
+    delete_todos: 'Int'
+    login: 'User'
+    logout: 'Boolean'
+    update_todo: 'Todo'
   }
   Query: { // field return type name
-    get_todos: 'Todo'
+    todos: 'Todo'
   }
   Todo: { // field return type name
     author: 'User'
@@ -144,6 +129,7 @@ export interface NexusGenFieldTypeNames {
     updated_at: 'DateTime'
   }
   User: { // field return type name
+    access_token: 'String'
     email: 'String'
     id: 'Int'
     todos: 'Todo'
@@ -159,12 +145,14 @@ export interface NexusGenArgTypes {
     create_user: { // args
       user: NexusGenInputs['create_user_input']; // create_user_input!
     }
-    done: { // args
-      done: boolean; // Boolean!
-      todo_id: number; // Int!
+    delete_todos: { // args
+      todo_ids: number[]; // [Int!]!
     }
-    login_user: { // args
-      login: NexusGenInputs['login_user_input']; // login_user_input!
+    login: { // args
+      login: NexusGenInputs['login_input']; // login_input!
+    }
+    update_todo: { // args
+      todo: NexusGenInputs['update_todo_input']; // update_todo_input!
     }
   }
 }

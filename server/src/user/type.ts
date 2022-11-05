@@ -1,23 +1,22 @@
-import { list, nonNull, objectType } from "nexus";
+import { objectType } from "nexus";
 
-export const user = objectType({
+export const GQL_User = objectType({
     name: 'User',
     definition(t){
         t.nonNull.int("id")
         t.nonNull.string("email")
-        t.nonNull.string("username")
+        t.nonNull.string("username"),
+        t.string("access_token")
         t.nonNull.list.nonNull.field("todos", {
             type: "Todo",
             async resolve(root, args, ctx){
-                const user = await ctx.prisma.user.findUnique({
+                const todos = await ctx.prisma.todo.findMany({
                     where: {
                         id: root.id
                     },
-                    include: {
-                        todos: true
-                }})
+                })
 
-                return user?.todos ?? []
+                return todos
             }
         })
     }
