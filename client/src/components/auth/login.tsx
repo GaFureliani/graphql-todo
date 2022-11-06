@@ -1,6 +1,5 @@
 import { Field, Form, Formik, ErrorMessage} from "formik"
 import { useLogin } from "hooks/auth/use-login"
-import { useAuth } from "hooks/auth/use-auth"
 import * as yup from 'yup'
 import { LoginBtn } from "./login-btn"
 
@@ -16,7 +15,6 @@ const initial_values = {
 
 export const Login = () => {
   const [login] = useLogin()
-  const setUser = useAuth(state => state.setUser)
   return (
     <Formik 
       validationSchema={validationSchema}

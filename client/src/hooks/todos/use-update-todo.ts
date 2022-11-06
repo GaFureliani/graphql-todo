@@ -17,9 +17,9 @@ export interface update_todo_data {
 export interface update_todo_input {
   todo: {
     todo_id: number
-    description: string
-    done: boolean
-    target_date: Date
+    description?: string
+    done?: boolean
+    target_date?: Date
   }
 }
 
