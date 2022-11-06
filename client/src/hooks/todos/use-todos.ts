@@ -16,7 +16,7 @@ export interface todos_data {
   }[]
 }
 
-const todos = gql`
+export const todos = gql`
   query Todos {
     todos {
       id

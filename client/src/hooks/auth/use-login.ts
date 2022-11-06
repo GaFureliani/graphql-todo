@@ -1,4 +1,6 @@
 import { gql, useMutation } from "@apollo/client";
+import { todos } from "hooks/todos/use-todos";
+import { useAuth } from "./use-auth";
 
 export interface login_data {
   login: {
@@ -28,4 +30,9 @@ export const login = gql`
   }
 `
 
-export const useLogin = () => useMutation<login_data, login_input>(login)
+export const useLogin = () => useMutation<login_data, login_input>(login, 
+  { refetchQueries: [todos],
+    onCompleted: ({login: user}) => {
+      useAuth.setState({user})
+    }
+  })
