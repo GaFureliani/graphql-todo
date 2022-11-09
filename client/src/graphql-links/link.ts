@@ -1,4 +1,4 @@
-import { from } from "@apollo/client";
+import { from } from '@apollo/client'
 
 import { error_toast_link } from 'graphql-links/error-toast-link'
 import { auth_link } from 'graphql-links/auth-link'

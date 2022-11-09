@@ -1,6 +1,6 @@
-import { gql, useMutation } from "@apollo/client";
+import { gql, useMutation } from '@apollo/client'
 
-interface logout_data {
+type logout_data = {
   logout: boolean
 }
 

@@ -1,19 +1,19 @@
 import { Fragment, ReactNode, useState } from 'react'
 import { Transition } from '@headlessui/react'
 
-interface ModalProps {
+type ModalProps = {
   children: ReactNode
   openButton: ReactNode
 }
 
-export const Modal = ({ children, openButton}: ModalProps) => {
+export const Modal = ({ children, openButton }: ModalProps) => {
   const [isOpen, setIsOpen] = useState(false)
   return (
-      <Fragment>
-        <span onClick={()=>setIsOpen(true)}>
-          {openButton}
-        </span>
-        <Transition
+    <Fragment>
+      <span onClick={() => setIsOpen(true)}>
+        {openButton}
+      </span>
+      <Transition
         show={isOpen}
         enter="transition duration-150 ease-out"
         enterFrom="transform opacity-0"

@@ -1,7 +1,7 @@
-import { gql, useQuery } from "@apollo/client";
+import { gql, useQuery } from '@apollo/client'
 
-export interface todos_data {
-  todos: {
+export type todos_data = {
+  todos: Array<{
     id: number
     done: boolean
     description: string
@@ -13,7 +13,7 @@ export interface todos_data {
     }
     created_at: string
     updated_at: string
-  }[]
+  }>
 }
 
 export const todos = gql`

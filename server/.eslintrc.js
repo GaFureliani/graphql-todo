@@ -9,10 +9,11 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
-    project: './tsconfig.json'
+    project: 'tsconfig.json'
   },
   rules: {
-    "@typescript-eslint/explicit-function-return-type": "off",
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/no-floating-promises': 'off',
     '@typescript-eslint/naming-convention': [
       'error',
       { selector: 'variableLike', format: ['snake_case', 'UPPER_CASE'] }

@@ -1,11 +1,10 @@
-import { gql, useMutation } from "@apollo/client";
+import { gql, useMutation } from '@apollo/client'
 
-
-export interface delete_todos_data {
+export type delete_todos_data = {
   delete_todos: number[]
 }
 
-export interface delete_todos_input {
+export type delete_todos_input = {
   todoIds: number[]
 }
 

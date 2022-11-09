@@ -1,6 +1,6 @@
-import { gql, useMutation } from "@apollo/client";
+import { gql, useMutation } from '@apollo/client'
 
-export interface update_todo_data {
+export type update_todo_data = {
   id: number
   done: boolean
   description: string
@@ -14,7 +14,7 @@ export interface update_todo_data {
   updated_at: string
 }
 
-export interface update_todo_input {
+export type update_todo_input = {
   todo: {
     todo_id: number
     description?: string

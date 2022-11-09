@@ -1,7 +1,6 @@
-import { Field, Form, Formik, ErrorMessage} from "formik"
+import { Field, Form, Formik, ErrorMessage } from 'formik'
 import * as yup from 'yup'
-import { SignUpBtn } from "components/auth/signup-btn"
-
+import { SignUpBtn } from 'components/auth/signup-btn'
 
 const validationSchema = yup.object({
   email: yup.string().email('invalid email').required('Required'),
@@ -15,7 +14,7 @@ const initial_values = {
 
 export const SignUp = () => {
   return (
-    <Formik 
+    <Formik
       validationSchema={validationSchema}
       initialValues={initial_values}
       onSubmit={console.log}

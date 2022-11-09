@@ -1,7 +1,7 @@
-import { Field, Form, Formik, ErrorMessage} from "formik"
-import { useLogin } from "hooks/auth/use-login"
+import { Field, Form, Formik, ErrorMessage } from 'formik'
+import { useLogin } from 'hooks/auth/use-login'
 import * as yup from 'yup'
-import { LoginBtn } from "./login-btn"
+import { LoginBtn } from './login-btn'
 
 const validationSchema = yup.object({
   email: yup.string().email('invalid email').required('Required'),
@@ -16,11 +16,11 @@ const initial_values = {
 export const Login = () => {
   const [login] = useLogin()
   return (
-    <Formik 
+    <Formik
       validationSchema={validationSchema}
       initialValues={initial_values}
-      onSubmit={({email, password}) => {
-        login({variables: {login: {email, password, with_credentials: true}}})
+      onSubmit={({ email, password }) => {
+        login({ variables: { login: { email, password, with_credentials: true } } })
       }}
     >
       <Form className="flex flex-col items-center md:w-[350px] pb-10 pt-5 px-4 gap-4 bg-white rounded-md">

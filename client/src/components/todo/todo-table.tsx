@@ -1,16 +1,16 @@
-import { format } from "date-fns"
-import { todos_data, useTodos } from "hooks/todos/use-todos"
-import { useUpdateTodo } from "hooks/todos/use-update-todo"
-import { ChangeEvent, useEffect, useState } from "react"
+import { format } from 'date-fns'
+import { todos_data, useTodos } from 'hooks/todos/use-todos'
+import { useUpdateTodo } from 'hooks/todos/use-update-todo'
+import { ChangeEvent, useState } from 'react'
 
 type Todo = todos_data['todos'][number]
 
 const TodoEntry = (data: Todo) => {
   const [updateTodo] = useUpdateTodo()
-  const [todo, setTodo] = useState(data)
+  const [todo] = useState(data)
 
-  const onDoneChange = async (e: ChangeEvent<HTMLInputElement>) => {
-    await updateTodo({
+  const onDoneChange = (e: ChangeEvent<HTMLInputElement>) => {
+    updateTodo({
       variables: {
         todo: {
           todo_id: todo.id,
@@ -20,7 +20,7 @@ const TodoEntry = (data: Todo) => {
     })
   }
   const onTargetDateChange = (e: ChangeEvent<HTMLInputElement>) => {
-    
+
   }
 
   return (
@@ -55,7 +55,7 @@ export const TodoTable = () => {
         </tr>
       </thead>
       <tbody className="">
-        {(data?.todos ?? []).map(t=>
+        {(data?.todos ?? []).map(t =>
           <TodoEntry key={t.id} {...t} />
         )}
       </tbody>

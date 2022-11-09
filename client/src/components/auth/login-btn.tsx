@@ -1,4 +1,4 @@
-import { DOMAttributes } from "react"
+import { DOMAttributes } from 'react'
 
 export const LoginBtn = (props: DOMAttributes<HTMLButtonElement>) => {
   return (

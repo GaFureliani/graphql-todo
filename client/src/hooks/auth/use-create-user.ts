@@ -1,6 +1,6 @@
-import { gql, useMutation } from "@apollo/client";
+import { gql, useMutation } from '@apollo/client'
 
-export interface create_user_data {
+export type create_user_data = {
   create_user: {
     id: number
     email: string
@@ -9,7 +9,7 @@ export interface create_user_data {
   }
 }
 
-export interface create_user_input {
+export type create_user_input = {
   user: {
     email: string
     username: string

@@ -1,6 +1,6 @@
-import { gql, useMutation } from "@apollo/client";
+import { gql, useMutation } from '@apollo/client'
 
-export interface create_todo_data {
+export type create_todo_data = {
   id: number
   done: boolean
   description: string
@@ -14,7 +14,7 @@ export interface create_todo_data {
   updated_at: string
 }
 
-export interface create_todo_input {
+export type create_todo_input = {
   todo: {
     target_date: Date
     description: string
@@ -40,4 +40,4 @@ const create_todo = gql`
   }
 `
 
-export const useCreateTodo = () => useMutation<create_todo_data, create_todo_input>(create_todo) 
+export const useCreateTodo = () => useMutation<create_todo_data, create_todo_input>(create_todo)
