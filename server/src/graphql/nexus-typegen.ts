@@ -3,11 +3,7 @@
  * Do not make changes to this file directly
  */
 
-
-import type { Context } from "./context"
-
-
-
+import type { Context } from './context'
 
 declare global {
   interface NexusGen extends NexusGenTypes {}
@@ -15,25 +11,24 @@ declare global {
 
 export interface NexusGenInputs {
   create_todo_input: { // input type
-    description: string; // String!
-    done: boolean; // Boolean!
-    target_date: NexusGenScalars['DateTime']; // DateTime!
+    description: string // String!
+    done: boolean // Boolean!
+    target_date: NexusGenScalars['DateTime'] // DateTime!
   }
   create_user_input: { // input type
-    email: string; // String!
-    password: string; // String!
-    username: string; // String!
+    email: string // String!
+    password: string // String!
+    username: string // String!
   }
   login_input: { // input type
-    email: string; // String!
-    password: string; // String!
-    with_credentials: boolean; // Boolean!
+    email: string // String!
+    password: string // String!
   }
   update_todo_input: { // input type
-    description?: string | null; // String
-    done?: boolean | null; // Boolean
-    target_date?: NexusGenScalars['DateTime'] | null; // DateTime
-    todo_id: number; // Int!
+    description?: string | null // String
+    done?: boolean | null // Boolean
+    target_date?: NexusGenScalars['DateTime'] | null // DateTime
+    todo_id: number // Int!
   }
 }
 
@@ -50,21 +45,21 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
-  Mutation: {};
-  Query: {};
+  Mutation: {}
+  Query: {}
   Todo: { // root type
-    created_at: NexusGenScalars['DateTime']; // DateTime!
-    description: string; // String!
-    done: boolean; // Boolean!
-    id: number; // Int!
-    target_date: NexusGenScalars['DateTime']; // DateTime!
-    updated_at: NexusGenScalars['DateTime']; // DateTime!
+    created_at: NexusGenScalars['DateTime'] // DateTime!
+    description: string // String!
+    done: boolean // Boolean!
+    id: number // Int!
+    target_date: NexusGenScalars['DateTime'] // DateTime!
+    updated_at: NexusGenScalars['DateTime'] // DateTime!
   }
   User: { // root type
-    access_token?: string | null; // String
-    email: string; // String!
-    id: number; // Int!
-    username: string; // String!
+    access_token?: string | null // String
+    email: string // String!
+    id: number // Int!
+    username: string // String!
   }
 }
 
@@ -80,31 +75,32 @@ export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
   Mutation: { // field return type
-    create_todo: NexusGenRootTypes['Todo']; // Todo!
-    create_user: NexusGenRootTypes['User']; // User!
-    delete_todos: number; // Int!
-    login: NexusGenRootTypes['User']; // User!
-    logout: boolean | null; // Boolean
-    update_todo: NexusGenRootTypes['Todo']; // Todo!
+    create_todo: NexusGenRootTypes['Todo'] // Todo!
+    create_user: NexusGenRootTypes['User'] // User!
+    delete_todos: number // Int!
+    login: NexusGenRootTypes['User'] // User!
+    logout: boolean | null // Boolean
+    refresh: NexusGenRootTypes['User'] // User!
+    update_todo: NexusGenRootTypes['Todo'] // Todo!
   }
   Query: { // field return type
-    todos: NexusGenRootTypes['Todo'][]; // [Todo!]!
+    todos: Array<NexusGenRootTypes['Todo']> // [Todo!]!
   }
   Todo: { // field return type
-    author: NexusGenRootTypes['User']; // User!
-    created_at: NexusGenScalars['DateTime']; // DateTime!
-    description: string; // String!
-    done: boolean; // Boolean!
-    id: number; // Int!
-    target_date: NexusGenScalars['DateTime']; // DateTime!
-    updated_at: NexusGenScalars['DateTime']; // DateTime!
+    author: NexusGenRootTypes['User'] // User!
+    created_at: NexusGenScalars['DateTime'] // DateTime!
+    description: string // String!
+    done: boolean // Boolean!
+    id: number // Int!
+    target_date: NexusGenScalars['DateTime'] // DateTime!
+    updated_at: NexusGenScalars['DateTime'] // DateTime!
   }
   User: { // field return type
-    access_token: string | null; // String
-    email: string; // String!
-    id: number; // Int!
-    todos: NexusGenRootTypes['Todo'][]; // [Todo!]!
-    username: string; // String!
+    access_token: string | null // String
+    email: string // String!
+    id: number // Int!
+    todos: Array<NexusGenRootTypes['Todo']> // [Todo!]!
+    username: string // String!
   }
 }
 
@@ -115,6 +111,7 @@ export interface NexusGenFieldTypeNames {
     delete_todos: 'Int'
     login: 'User'
     logout: 'Boolean'
+    refresh: 'User'
     update_todo: 'Todo'
   }
   Query: { // field return type name
@@ -141,19 +138,19 @@ export interface NexusGenFieldTypeNames {
 export interface NexusGenArgTypes {
   Mutation: {
     create_todo: { // args
-      todo: NexusGenInputs['create_todo_input']; // create_todo_input!
+      todo: NexusGenInputs['create_todo_input'] // create_todo_input!
     }
     create_user: { // args
-      user: NexusGenInputs['create_user_input']; // create_user_input!
+      user: NexusGenInputs['create_user_input'] // create_user_input!
     }
     delete_todos: { // args
-      todo_ids: number[]; // [Int!]!
+      todo_ids: number[] // [Int!]!
     }
     login: { // args
-      login: NexusGenInputs['login_input']; // login_input!
+      login: NexusGenInputs['login_input'] // login_input!
     }
     update_todo: { // args
-      todo: NexusGenInputs['update_todo_input']; // update_todo_input!
+      todo: NexusGenInputs['update_todo_input'] // update_todo_input!
     }
   }
 }
@@ -164,23 +161,23 @@ export interface NexusGenAbstractTypeMembers {
 export interface NexusGenTypeInterfaces {
 }
 
-export type NexusGenObjectNames = keyof NexusGenObjects;
+export type NexusGenObjectNames = keyof NexusGenObjects
 
-export type NexusGenInputNames = keyof NexusGenInputs;
+export type NexusGenInputNames = keyof NexusGenInputs
 
-export type NexusGenEnumNames = never;
+export type NexusGenEnumNames = never
 
-export type NexusGenInterfaceNames = never;
+export type NexusGenInterfaceNames = never
 
-export type NexusGenScalarNames = keyof NexusGenScalars;
+export type NexusGenScalarNames = keyof NexusGenScalars
 
-export type NexusGenUnionNames = never;
+export type NexusGenUnionNames = never
 
-export type NexusGenObjectsUsingAbstractStrategyIsTypeOf = never;
+export type NexusGenObjectsUsingAbstractStrategyIsTypeOf = never
 
-export type NexusGenAbstractsUsingStrategyResolveType = never;
+export type NexusGenAbstractsUsingStrategyResolveType = never
 
-export type NexusGenFeaturesConfig = {
+export interface NexusGenFeaturesConfig {
   abstractTypeStrategies: {
     isTypeOf: false
     resolveType: true
@@ -189,31 +186,30 @@ export type NexusGenFeaturesConfig = {
 }
 
 export interface NexusGenTypes {
-  context: Context;
-  inputTypes: NexusGenInputs;
-  rootTypes: NexusGenRootTypes;
-  inputTypeShapes: NexusGenInputs & NexusGenEnums & NexusGenScalars;
-  argTypes: NexusGenArgTypes;
-  fieldTypes: NexusGenFieldTypes;
-  fieldTypeNames: NexusGenFieldTypeNames;
-  allTypes: NexusGenAllTypes;
-  typeInterfaces: NexusGenTypeInterfaces;
-  objectNames: NexusGenObjectNames;
-  inputNames: NexusGenInputNames;
-  enumNames: NexusGenEnumNames;
-  interfaceNames: NexusGenInterfaceNames;
-  scalarNames: NexusGenScalarNames;
-  unionNames: NexusGenUnionNames;
-  allInputTypes: NexusGenTypes['inputNames'] | NexusGenTypes['enumNames'] | NexusGenTypes['scalarNames'];
-  allOutputTypes: NexusGenTypes['objectNames'] | NexusGenTypes['enumNames'] | NexusGenTypes['unionNames'] | NexusGenTypes['interfaceNames'] | NexusGenTypes['scalarNames'];
+  context: Context
+  inputTypes: NexusGenInputs
+  rootTypes: NexusGenRootTypes
+  inputTypeShapes: NexusGenInputs & NexusGenEnums & NexusGenScalars
+  argTypes: NexusGenArgTypes
+  fieldTypes: NexusGenFieldTypes
+  fieldTypeNames: NexusGenFieldTypeNames
+  allTypes: NexusGenAllTypes
+  typeInterfaces: NexusGenTypeInterfaces
+  objectNames: NexusGenObjectNames
+  inputNames: NexusGenInputNames
+  enumNames: NexusGenEnumNames
+  interfaceNames: NexusGenInterfaceNames
+  scalarNames: NexusGenScalarNames
+  unionNames: NexusGenUnionNames
+  allInputTypes: NexusGenTypes['inputNames'] | NexusGenTypes['enumNames'] | NexusGenTypes['scalarNames']
+  allOutputTypes: NexusGenTypes['objectNames'] | NexusGenTypes['enumNames'] | NexusGenTypes['unionNames'] | NexusGenTypes['interfaceNames'] | NexusGenTypes['scalarNames']
   allNamedTypes: NexusGenTypes['allInputTypes'] | NexusGenTypes['allOutputTypes']
-  abstractTypes: NexusGenTypes['interfaceNames'] | NexusGenTypes['unionNames'];
-  abstractTypeMembers: NexusGenAbstractTypeMembers;
-  objectsUsingAbstractStrategyIsTypeOf: NexusGenObjectsUsingAbstractStrategyIsTypeOf;
-  abstractsUsingStrategyResolveType: NexusGenAbstractsUsingStrategyResolveType;
-  features: NexusGenFeaturesConfig;
+  abstractTypes: NexusGenTypes['interfaceNames'] | NexusGenTypes['unionNames']
+  abstractTypeMembers: NexusGenAbstractTypeMembers
+  objectsUsingAbstractStrategyIsTypeOf: NexusGenObjectsUsingAbstractStrategyIsTypeOf
+  abstractsUsingStrategyResolveType: NexusGenAbstractsUsingStrategyResolveType
+  features: NexusGenFeaturesConfig
 }
-
 
 declare global {
   interface NexusGenPluginTypeConfig<TypeName extends string> {

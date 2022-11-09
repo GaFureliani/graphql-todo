@@ -15,6 +15,7 @@ type Mutation {
   delete_todos(todo_ids: [Int!]!): Int!
   login(login: login_input!): User!
   logout: Boolean
+  refresh: User!
 
   """Returns a Todo object after the update"""
   update_todo(todo: update_todo_input!): Todo!
@@ -57,7 +58,6 @@ input create_user_input {
 input login_input {
   email: String!
   password: String!
-  with_credentials: Boolean!
 }
 
 input update_todo_input {
