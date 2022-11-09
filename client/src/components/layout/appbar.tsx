@@ -12,7 +12,7 @@ export const Appbar = () => {
       <div className="flex items-center gap-8">
         {username}
         {
-          access_token === ''
+          access_token !== ''
             ? <LogoutBtn />
             : <div className="flex items-center gap-3">
               <Modal openButton={

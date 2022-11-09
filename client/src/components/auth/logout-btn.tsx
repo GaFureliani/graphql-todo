@@ -6,9 +6,7 @@ export const LogoutBtn = () => {
   const onLogout = () => {
     logout()
       .then(response => {
-        if (typeof response.data?.logout !== 'undefined') {
-          resetAuth()
-        }
+        resetAuth()
       })
   }
 

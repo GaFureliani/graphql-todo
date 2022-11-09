@@ -20,7 +20,7 @@ export const Login = () => {
       validationSchema={validationSchema}
       initialValues={initial_values}
       onSubmit={({ email, password }) => {
-        login({ variables: { login: { email, password, with_credentials: true } } })
+        login({ variables: { login: { email, password } } })
       }}
     >
       <Form className="flex flex-col items-center md:w-[350px] pb-10 pt-5 px-4 gap-4 bg-white rounded-md">

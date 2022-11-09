@@ -1,6 +1,7 @@
 import { createHttpLink } from '@apollo/client'
+import { environment } from 'helpers/environment'
 
 export const httpLink = createHttpLink({
-  uri: 'http://localhost:4000/graphql',
+  uri: environment().API_URL,
   credentials: 'include'
 })

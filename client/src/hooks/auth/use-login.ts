@@ -15,7 +15,6 @@ export type login_input = {
   login: {
     email: string
     password: string
-    with_credentials: boolean
   }
 }
 
