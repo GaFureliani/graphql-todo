@@ -47,7 +47,7 @@ export const TodoTable = () => {
   return (
     <table className="mx-auto table-auto w-1/2 border-separate border-spacing-y-3">
       <thead className="">
-        <tr className="bg-gray-500 text-white h-15">
+        <tr className="bg-gray-500 text-white h-20 p-5">
           <th className="">id</th>
           <th className="">Done</th>
           <th className="">Description</th>
