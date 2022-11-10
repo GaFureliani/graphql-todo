@@ -1,4 +1,5 @@
 import { gql, useMutation } from '@apollo/client'
+import { todos } from './use-todos'
 
 export type delete_todos_data = {
   delete_todos: number[]
@@ -14,4 +15,6 @@ const delete_todos = gql`
   }
 `
 
-export const useDeleteTodos = () => useMutation<delete_todos_data, delete_todos_input>(delete_todos)
+export const useDeleteTodos = () => useMutation<delete_todos_data, delete_todos_input>(delete_todos, {
+  refetchQueries: () => [todos]
+})

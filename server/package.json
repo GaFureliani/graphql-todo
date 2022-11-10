@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "ts-node-dev -r tsconfig-paths/register --transpile-only --no-notify src/server.ts",
     "generate": "ts-node -r tsconfig-paths/register --transpile-only src/graphql/schema.ts",
+    "studio": "prisma studio",
     "build": "tsc",
     "lint": "eslint ./src/** --fix"
   },

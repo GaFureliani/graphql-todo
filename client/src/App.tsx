@@ -3,6 +3,7 @@ import { LoadingNotification } from 'components/loading-notification/loading-not
 import { TodoTable } from 'components/todo/todo-table'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import 'react-datepicker/dist/react-datepicker.css'
 
 export const App = () => {
   return (

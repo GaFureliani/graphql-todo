@@ -30,7 +30,7 @@ export const Login = () => {
           <ErrorMessage name='email' component='div' className="text-red-500"/>
         </div>
         <div className="w-full">
-          <Field name='password' className='block shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight outline-none' placeholder='Password' />
+          <Field name='password' type='password' className='block shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight outline-none' placeholder='Password' />
           <ErrorMessage name='password' component='div' className="text-red-500"/>
         </div>
         <LoginBtn />

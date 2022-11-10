@@ -6,7 +6,7 @@ export const create_todo_input = inputObjectType({
   definition (t) {
     t.nonNull.string('description')
     t.nonNull.boolean('done')
-    t.nonNull.field('target_date', { type: 'DateTime' })
+    t.nonNull.field('target_date', { type: 'Date' })
   }
 })
 
@@ -41,7 +41,7 @@ export const update_todo_input = inputObjectType({
     t.nonNull.int('todo_id')
     t.string('description')
     t.boolean('done')
-    t.field('target_date', { type: 'DateTime' })
+    t.field('target_date', { type: 'Date' })
   }
 })
 

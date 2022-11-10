@@ -1,4 +1,5 @@
 import { gql, useMutation } from '@apollo/client'
+import { todos } from './use-todos'
 
 export type update_todo_data = {
   id: number
@@ -19,7 +20,7 @@ export type update_todo_input = {
     todo_id: number
     description?: string
     done?: boolean
-    target_date?: Date
+    target_date?: string
   }
 }
 
@@ -41,4 +42,6 @@ const update_todo = gql`
   }
 `
 
-export const useUpdateTodo = () => useMutation<update_todo_data, update_todo_input>(update_todo)
+export const useUpdateTodo = () => useMutation<update_todo_data, update_todo_input>(update_todo, {
+  refetchQueries: [todos]
+})
