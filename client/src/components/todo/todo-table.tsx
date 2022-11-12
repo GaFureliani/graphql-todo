@@ -45,9 +45,9 @@ const TodoEntry = (todo_data: Todo) => {
     setIsModified(e.target.checked !== todo_data.done)
   }
   const onDateChange = (date: Date) => {
-    setTodo(state => ({ ...state, target_date: format(date, 'yyyy-MM-dd') }))
+    setTodo(state => ({ ...state, target_date: date.toISOString() }))
     setIsModified(true)
-    setIsModified(format(date, 'yyyy-MM-dd') !== todo_data.target_date)
+    setIsModified(date.toISOString() !== todo_data.target_date)
   }
   return (
     <tr className='mt-2 border-2 py-2 even:bg-gray-100'>
@@ -63,7 +63,14 @@ const TodoEntry = (todo_data: Todo) => {
         <input type="text" value={todo.description} onChange={onDescriptionChange} className="p-2 outline-none border-2 w-[max(90%,100px)]" />
       </td>
       <td className="text-center">
-        {/* <DatePicker className='p-2' dateFormat="yyyy-MM-dd" selected={new Date(Date.parse(todo.target_date))} onChange={onDateChange} /> */}
+        <DatePicker
+          timeIntervals={15}
+          timeFormat="HH:mm"
+          showTimeSelect
+          className='p-2'
+          dateFormat="MMMM dd, yyyy HH:mm"
+          selected={new Date(todo.target_date)}
+          onChange={onDateChange} />
       </td>
       <td>
         <div className='flex gap-2'>
@@ -85,7 +92,7 @@ export const TodoTable = () => {
         todo: {
           description: '',
           done: false,
-          target_date: format(new Date(), 'yyyy-MM-dd')
+          target_date: new Date().toISOString()
         }
       }
     })

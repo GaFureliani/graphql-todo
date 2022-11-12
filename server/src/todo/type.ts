@@ -6,10 +6,10 @@ export const GQL_TODO = objectType({
   definition (t) {
     t.nonNull.int('id')
     t.nonNull.string('description')
-    t.nonNull.field('target_date', { type: 'Date' })
+    t.nonNull.field('target_date', { type: 'DateTime' })
     t.nonNull.boolean('done')
-    t.nonNull.field('created_at', { type: 'Date' })
-    t.nonNull.field('updated_at', { type: 'Date' })
+    t.nonNull.field('created_at', { type: 'DateTime' })
+    t.nonNull.field('updated_at', { type: 'DateTime' })
     t.nonNull.field('author', {
       type: 'User',
       async resolve (root, args, ctx) {

@@ -17,7 +17,7 @@ export interface NexusGenInputs {
   create_todo_input: { // input type
     description: string; // String!
     done: boolean; // Boolean!
-    target_date: NexusGenScalars['Date']; // Date!
+    target_date: NexusGenScalars['DateTime']; // DateTime!
   }
   create_user_input: { // input type
     email: string; // String!
@@ -31,7 +31,7 @@ export interface NexusGenInputs {
   update_todo_input: { // input type
     description?: string | null; // String
     done?: boolean | null; // Boolean
-    target_date?: NexusGenScalars['Date'] | null; // Date
+    target_date?: NexusGenScalars['DateTime'] | null; // DateTime
     todo_id: number; // Int!
   }
 }
@@ -45,19 +45,19 @@ export interface NexusGenScalars {
   Float: number
   Boolean: boolean
   ID: string
-  Date: any
+  DateTime: any
 }
 
 export interface NexusGenObjects {
   Mutation: {};
   Query: {};
   Todo: { // root type
-    created_at: NexusGenScalars['Date']; // Date!
+    created_at: NexusGenScalars['DateTime']; // DateTime!
     description: string; // String!
     done: boolean; // Boolean!
     id: number; // Int!
-    target_date: NexusGenScalars['Date']; // Date!
-    updated_at: NexusGenScalars['Date']; // Date!
+    target_date: NexusGenScalars['DateTime']; // DateTime!
+    updated_at: NexusGenScalars['DateTime']; // DateTime!
   }
   User: { // root type
     access_token?: string | null; // String
@@ -92,12 +92,12 @@ export interface NexusGenFieldTypes {
   }
   Todo: { // field return type
     author: NexusGenRootTypes['User']; // User!
-    created_at: NexusGenScalars['Date']; // Date!
+    created_at: NexusGenScalars['DateTime']; // DateTime!
     description: string; // String!
     done: boolean; // Boolean!
     id: number; // Int!
-    target_date: NexusGenScalars['Date']; // Date!
-    updated_at: NexusGenScalars['Date']; // Date!
+    target_date: NexusGenScalars['DateTime']; // DateTime!
+    updated_at: NexusGenScalars['DateTime']; // DateTime!
   }
   User: { // field return type
     access_token: string | null; // String
@@ -123,12 +123,12 @@ export interface NexusGenFieldTypeNames {
   }
   Todo: { // field return type name
     author: 'User'
-    created_at: 'Date'
+    created_at: 'DateTime'
     description: 'String'
     done: 'Boolean'
     id: 'Int'
-    target_date: 'Date'
-    updated_at: 'Date'
+    target_date: 'DateTime'
+    updated_at: 'DateTime'
   }
   User: { // field return type name
     access_token: 'String'
